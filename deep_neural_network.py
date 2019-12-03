@@ -54,4 +54,5 @@ y = 0.75
 point = np.array([[x, y]])
 predict = model.predict(point)
 plt.plot([x], [y], marker='o', markersize=10, color="red")
+plt.show()
 print("Prediction is: ", predict)
