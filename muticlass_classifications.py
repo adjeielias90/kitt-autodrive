@@ -47,8 +47,9 @@ plt.scatter(X[y==2, 0], X[y==2, 1])
 plt.scatter(X[y==3, 0], X[y==3, 1])
 plt.scatter(X[y==4, 0], X[y==4, 1])
 
-x = -0.5
-y = -0.5
+# testing sample y and x values
+x = 0.5
+y = 0.5
 
 point = np.array([[x, y]])
 # using predict_classes instead of predict
