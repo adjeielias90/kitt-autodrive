@@ -51,6 +51,8 @@ x = -0.5
 y = -0.5
 
 point = np.array([[x, y]])
+# using predict_classes instead of predict
+# predict classes is more suited for multiclass data, such as what we have here.
 prediction = model.predict_classes(point)
 plt.plot([x], [y], marker='o', markersize=10, color="yellow")
 plt.show()
