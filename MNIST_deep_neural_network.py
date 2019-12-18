@@ -62,3 +62,8 @@ def create_model():
     model.add(Dense(num_classes, activation='softmax'))
     model.compile(Adam(lr=0.01), loss='categorical_crossentropy', metrics=['accuracy'])
     return model
+
+model = create_model()
+print(model.summary())
+
+history = model.fit(X_train, y_train, validation_split=0.1, epochs = 10, batch_size = 200, verbose = 1, shuffle = 1)
