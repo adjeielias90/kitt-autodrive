@@ -73,4 +73,12 @@ plt.plot(history.history['val_loss'])
 plt.legend(['loss', 'val_loss'])
 plt.title('Loss')
 plt.xlabel('epoch')
+
+
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.legend(['acc', 'val_acc'])
+plt.title('Accuracy')
+plt.xlabel('epoch')
+
 plt.show()
