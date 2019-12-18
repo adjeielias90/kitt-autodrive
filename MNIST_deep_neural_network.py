@@ -49,3 +49,7 @@ y_test = to_categorical(y_test, 10)
 
 X_train = X_train/255
 X_test = X_test/255
+
+num_pixels = 784
+X_train = X_train.reshape(X_train.shape[0], num_pixels)
+X_test = X_test.reshape(X_test.shape[0], num_pixels)
