@@ -82,3 +82,8 @@ plt.title('Accuracy')
 plt.xlabel('epoch')
 
 plt.show()
+
+score = model.evaluate(X_test, y_test, verbose=0)
+print(type(score))
+print('Test score:', score[0])
+print('Test accuracy:', score[1])
