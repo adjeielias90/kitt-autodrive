@@ -43,3 +43,9 @@ plt.title("Distribution of the training dataset")
 plt.xlabel("Class number")
 plt.ylabel("Number of images")
 plt.show()
+
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+
+X_train = X_train/255
+X_test = X_test/255
