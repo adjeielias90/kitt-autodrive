@@ -145,6 +145,8 @@ print(img.shape)
 print(img.shape)
 print("predicted digit: "+str(model.predict_classes(img)))
 
+# plt.show()
+
 layer1 = Model(inputs=model.layers[0].input, outputs=model.layers[0].output)
 layer2 = Model(inputs=model.layers[0].input, outputs=model.layers[2].output)
 
@@ -166,3 +168,5 @@ for i in range(15):
     plt.subplot(3, 5, i+1)
     plt.imshow(visual_layer2[0, :, :, i], cmap=plt.get_cmap('jet'))
     plt.axis('off')
+
+plt.show()
