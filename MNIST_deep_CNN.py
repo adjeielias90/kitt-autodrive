@@ -109,3 +109,55 @@ plt.title('Accuracy')
 plt.xlabel('epoch')
 
 plt.show()
+
+score = model.evaluate(X_test, y_test, verbose=0)
+
+print('Test score:', score[0])
+print('Test accuracy:', score[1])
+
+
+#predict internet number
+import requests
+from PIL import Image
+url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST8KzXHtkSHcxzdpnllMhAj0upLEwnNFdtY6j4YUPcmaf4Ty3u'
+
+r = requests.get(url, stream=True)
+img = Image.open(r.raw)
+plt.imshow(img, cmap=plt.get_cmap('gray'))
+
+import cv2
+
+img = np.asarray(img)
+img = cv2.resize(img, (28, 28))
+img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img = cv2.bitwise_not(img)
+plt.imshow(img, cmap=plt.get_cmap('gray'))
+
+img = img/255
+img = img.reshape(1,28,28,1)
+print(img.shape)
+
+print(img.shape)
+print("predicted digit: "+str(model.predict_classes(img)))
+
+layer1 = Model(inputs=model.layers[0].input, outputs=model.layers[0].output)
+layer2 = Model(inputs=model.layers[0].input, outputs=model.layers[2].output)
+
+visual_layer1, visual_layer2 = layer1.predict(img), layer2.predict(img)
+
+print(visual_layer1.shape)
+print(visual_layer2.shape)
+
+#layer 1
+plt.figure(figsize=(10, 6))
+for i in range(30):
+    plt.subplot(6, 5, i+1)
+    plt.imshow(visual_layer1[0, :, :, i], cmap=plt.get_cmap('jet'))
+    plt.axis('off')
+
+#layer 2
+plt.figure(figsize=(10, 6))
+for i in range(15):
+    plt.subplot(3, 5, i+1)
+    plt.imshow(visual_layer2[0, :, :, i], cmap=plt.get_cmap('jet'))
+    plt.axis('off')
