@@ -71,3 +71,41 @@ y_test = to_categorical(y_test, 10)
 
 X_train = X_train/255
 X_test = X_test/255
+
+# define the larger leNet CNN
+def leNet_model():
+  # create model
+  model = Sequential()
+  model.add(Conv2D(30, (5, 5), input_shape=(28, 28, 1), activation='relu')) # The first layer of our CNN
+  model.add(MaxPooling2D(pool_size=(2, 2)))
+
+  model.add(Conv2D(15, (3, 3), activation='relu'))
+  model.add(MaxPooling2D(pool_size=(2, 2)))
+
+  model.add(Flatten())
+  model.add(Dense(500, activation='relu'))
+  model.add(Dropout(0.5))
+  model.add(Dense(num_classes, activation='softmax'))
+  # Compile model
+  model.compile(Adam(lr = 0.01), loss='categorical_crossentropy', metrics=['accuracy'])
+  return model
+
+# Initialize an instance of our model
+model = leNet_model()
+print(model.summary())
+
+history=model.fit(X_train, y_train, epochs=10,  validation_split = 0.1, batch_size = 400, verbose = 1, shuffle = 1)
+
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.legend(['training', 'validation'])
+plt.title('Loss')
+plt.xlabel('epoch')
+
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.legend(['training','validation'])
+plt.title('Accuracy')
+plt.xlabel('epoch')
+
+plt.show()
