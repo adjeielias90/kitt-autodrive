@@ -84,6 +84,9 @@ def leNet_model():
 
   model.add(Flatten())
   model.add(Dense(500, activation='relu'))
+  # Add dropout layer
+  # Turn of nodes that are not in use.
+#   Decreased generalization error to prevent overfitting
   model.add(Dropout(0.5))
   model.add(Dense(num_classes, activation='softmax'))
   # Compile model
@@ -102,8 +105,8 @@ plt.legend(['training', 'validation'])
 plt.title('Loss')
 plt.xlabel('epoch')
 
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.legend(['training','validation'])
 plt.title('Accuracy')
 plt.xlabel('epoch')
@@ -121,7 +124,7 @@ print('Test accuracy:', score[1])
 #predict internet number
 import requests
 from PIL import Image
-url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST8KzXHtkSHcxzdpnllMhAj0upLEwnNFdtY6j4YUPcmaf4Ty3u'
+url = 'https://www.researchgate.net/profile/Jose_Sempere/publication/221258631/figure/fig1/AS:305526891139075@1449854695342/Handwritten-digit-2.png'
 
 r = requests.get(url, stream=True)
 img = Image.open(r.raw)
