@@ -116,6 +116,8 @@ print('Test score:', score[0])
 print('Test accuracy:', score[1])
 
 
+# Test Model
+
 #predict internet number
 import requests
 from PIL import Image
