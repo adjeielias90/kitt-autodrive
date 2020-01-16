@@ -76,7 +76,7 @@ plt.title("Distribution of the train dataset")
 plt.xlabel("Class number")
 plt.ylabel("Number of images")
 plt.show()
-import cv2
+
 
 plt.imshow(X_train[1000])
 plt.axis("off")
