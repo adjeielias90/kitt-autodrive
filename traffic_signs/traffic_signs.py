@@ -18,12 +18,12 @@ import cv2
 from keras.callbacks import LearningRateScheduler, ModelCheckpoint
 
 np.random.seed(0)
-# TODO: Implement load the data here.
+#Implement load the data here.
 with open('traffic-signs/train.p', 'rb') as f:
     train_data = pickle.load(f)
 with open('traffic-signs/valid.p', 'rb') as f:
     val_data = pickle.load(f)
-# TODO: Load test data
+#Load test data
 with open('traffic-signs/test.p', 'rb') as f:
     test_data = pickle.load(f)
 
