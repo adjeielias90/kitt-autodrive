@@ -98,6 +98,8 @@ plt.axis("off")
 print(img.shape)
 
 # Light balance image with historgram equalization
+# Histogram equalization flattens the histogram of an image,
+# improving the contrast and light balance.
 def equalize(img):
     img = cv2.equalizeHist(img)
     return img
@@ -108,14 +110,17 @@ plt.axis("off")
 print(img.shape)
 
 # Preprocess image
+# Merge all preprocesses into a pre-processing function
 def preprocess(img):
     img = grayscale(img)
     img = equalize(img)
+    # Normalize result
     img = img/255
     return img
 
 
 # Put it in a numpy array
+# Preprocess all images in our test, validation and training sets
 X_train = np.array(list(map(preprocess, X_train)))
 X_test = np.array(list(map(preprocess, X_test)))
 X_val = np.array(list(map(preprocess, X_val)))
