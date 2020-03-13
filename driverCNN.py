@@ -38,3 +38,4 @@ hist, bins = np.histogram(data['steering'], num_bins)
 center = (bins[:-1]+ bins[1:]) * 0.5
 plt.bar(center, hist, width=0.05)
 plt.plot((np.min(data['steering']), np.max(data['steering'])), (samples_per_bin, samples_per_bin))
+plt.show()
