@@ -13,3 +13,9 @@ import cv2
 import pandas as pd
 import ntpath
 import random
+
+datadir = './training_data'
+columns = ['center', 'left', 'right', 'steering', 'throttle', 'reverse', 'speed']
+data = pd.read_csv(os.path.join(datadir, 'driving_log.csv'), names = columns)
+pd.set_option('display.max_colwidth', -1)
+print(data.head())
