@@ -39,3 +39,15 @@ center = (bins[:-1]+ bins[1:]) * 0.5
 plt.bar(center, hist, width=0.05)
 plt.plot((np.min(data['steering']), np.max(data['steering'])), (samples_per_bin, samples_per_bin))
 plt.show()
+
+# Shuffle data
+print('total data:', len(data))
+remove_list = []
+for j in range(num_bins):
+  list_ = []
+  for i in range(len(data['steering'])):
+    if data['steering'][i] >= bins[j] and data['steering'][i] <= bins[j+1]:
+      list_.append(i)
+  list_ = shuffle(list_)
+  list_ = list_[samples_per_bin:]
+  remove_list.extend(list_)
