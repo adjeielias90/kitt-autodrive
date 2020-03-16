@@ -99,3 +99,11 @@ X_train, X_valid, y_train, y_valid = train_test_split(image_paths, steerings, te
 print('Training Samples: {}\nValid Samples: {}'.format(len(X_train), len(X_valid)))
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+# Plotting steering angles with training data
+axes[0].hist(y_train, bins=num_bins, width=0.05, color='blue')
+axes[0].set_title('Training set')
+
+# Plot steering angles for validation data
+axes[1].hist(y_valid, bins=num_bins, width=0.05, color='red')
+axes[1].set_title('Validation set')
