@@ -21,7 +21,7 @@ def img_preprocess(img):
 
 @sio.on('telemetry')
 def telemetry(sid, data):
-  image = Image.open(BytesIO(base64.b64encode(data['image'])))
+  image = Image.open(BytesIO(base64.b64decode(data['image'])))
   image = np.asarray(image)
   iamge = img_preprocess(image)
   image = np.array([iamge])
