@@ -293,3 +293,22 @@ def nvidia_model():
 model = nvidia_model()
 
 print(model.summary())
+
+# Train our shiny new model
+history = model.fit_generator(batch_generator(X_train, y_train, 100, 1),
+                                  steps_per_epoch=300,
+                                  epochs=10,
+                                  validation_data=batch_generator(X_valid, y_valid, 100, 0),
+                                  validation_steps=200,
+                                  verbose=1,
+                                  shuffle = 1)
+
+# Lets see how our training went
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.legend(['training', 'validation'])
+plt.title('Loss')
+plt.xlabel('Epoch')
+
+# Save model as kitt..lol.
+model.save('kitt.h5')
