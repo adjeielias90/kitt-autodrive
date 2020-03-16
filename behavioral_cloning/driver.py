@@ -10,6 +10,7 @@ import numpy as np
 
 sio = socketio.Server()
 app = Flask(__name__) #'__main__'
+speed_limit = 10
 
 def img_preprocess(img):
   img = img[60:135,:,:]
@@ -21,12 +22,15 @@ def img_preprocess(img):
 
 @sio.on('telemetry')
 def telemetry(sid, data):
+  speed = float(data['speed'])
   image = Image.open(BytesIO(base64.b64decode(data['image'])))
   image = np.asarray(image)
   iamge = img_preprocess(image)
   image = np.array([iamge])
   steering_angle = float(model.predict(image))
-  send_control(steering_angle, 1.0)
+  throttle = 1.0 - speed/speed_limit
+  print('{} {} {}'.format(steering_angle, throttle, speed))
+  send_control(steering_angle, throttle)
 
 
 
