@@ -291,4 +291,5 @@ def nvidia_model():
   model.compile(loss='mse', optimizer=optimizer)
   return model
 model = nvidia_model()
+
 print(model.summary())
