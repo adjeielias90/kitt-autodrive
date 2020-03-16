@@ -97,3 +97,5 @@ image_paths, steerings = load_img_steering(datadir + '/IMG', data)
 # Split data into test and training sets
 X_train, X_valid, y_train, y_valid = train_test_split(image_paths, steerings, test_size=0.2, random_state=6)
 print('Training Samples: {}\nValid Samples: {}'.format(len(X_train), len(X_valid)))
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
