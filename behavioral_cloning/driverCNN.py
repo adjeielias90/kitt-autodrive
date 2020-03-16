@@ -215,12 +215,13 @@ for i in range(10):
   axs[i][1].set_title("Augmented Image")
 
 def img_preprocess(img):
-    img = img[60:135,:,:]
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
-    img = cv2.GaussianBlur(img,  (3, 3), 0)
-    img = cv2.resize(img, (200, 66))
-    img = img/255
-    return img
+  img = img[60:135,:,:]
+  img = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
+  img = cv2.GaussianBlur(img,  (3, 3), 0)
+  img = cv2.resize(img, (200, 66))
+  img = img/255
+  return img
+
 image = image_paths[100]
 original_image = mpimg.imread(image)
 preprocessed_image = img_preprocess(original_image)
