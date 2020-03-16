@@ -262,3 +262,10 @@ axs[0].set_title('Training Image')
 
 axs[1].imshow(x_valid_gen[0])
 axs[1].set_title('Validation Image')
+
+def nvidia_model():
+  model = Sequential()
+  model.add(Convolution2D(24, 5, 5, subsample=(2, 2), input_shape=(66, 200, 3), activation='elu'))
+  model.add(Convolution2D(36, 5, 5, subsample=(2, 2), activation='elu'))
+  model.add(Convolution2D(48, 5, 5, subsample=(2, 2), activation='elu'))
+  model.add(Convolution2D(64, 3, 3, activation='elu'))
