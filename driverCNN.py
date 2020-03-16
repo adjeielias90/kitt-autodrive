@@ -108,33 +108,157 @@ axes[0].set_title('Training set')
 axes[1].hist(y_valid, bins=num_bins, width=0.05, color='red')
 axes[1].set_title('Validation set')
 
-
-def nvidia_model():
-  model = Sequential()
-  model.add(Convolution2D(24, 5, 5, subsample=(2, 2), input_shape=(66, 200, 3), activation='elu'))
-  model.add(Convolution2D(36, 5, 5, subsample=(2, 2), activation='elu'))
-  model.add(Convolution2D(48, 5, 5, subsample=(2, 2), activation='elu'))
-  model.add(Convolution2D(64, 3, 3, activation='elu'))
-
-  model.add(Convolution2D(64, 3, 3, activation='elu'))
-#   model.add(Dropout(0.5))
+def zoom(image):
+  zoom = iaa.Affine(scale=(1, 1.3))
+  image = zoom.augment_image(image)
+  return image
 
 
-  model.add(Flatten())
+image = image_paths[random.randint(0, 1000)]
+original_image = mpimg.imread(image)
+zoomed_image = zoom(original_image)
 
-  model.add(Dense(100, activation = 'elu'))
-#   model.add(Dropout(0.5))
+fig, axs = plt.subplots(1, 2, figsize=(15, 10))
+fig.tight_layout()
 
-  model.add(Dense(50, activation = 'elu'))
-#   model.add(Dropout(0.5))
+axs[0].imshow(original_image)
+axs[0].set_title('Original Image')
 
-  model.add(Dense(10, activation = 'elu'))
-#   model.add(Dropout(0.5))
+axs[1].imshow(zoomed_image)
+axs[1].set_title('Zoomed Image')
 
-  model.add(Dense(1))
 
-  optimizer = Adam(lr=1e-3)
-  model.compile(loss='mse', optimizer=optimizer)
-  return model
-model = nvidia_model()
-print(model.summary())
+def pan(image):
+  pan = iaa.Affine(translate_percent= {"x" : (-0.1, 0.1), "y": (-0.1, 0.1)})
+  image = pan.augment_image(image)
+  return image
+image = image_paths[random.randint(0, 1000)]
+original_image = mpimg.imread(image)
+panned_image = pan(original_image)
+
+fig, axs = plt.subplots(1, 2, figsize=(15, 10))
+fig.tight_layout()
+
+axs[0].imshow(original_image)
+axs[0].set_title('Original Image')
+
+axs[1].imshow(panned_image)
+axs[1].set_title('Panned Image')
+def img_random_brightness(image):
+    brightness = iaa.Multiply((0.2, 1.2))
+    image = brightness.augment_image(image)
+    return image
+image = image_paths[random.randint(0, 1000)]
+original_image = mpimg.imread(image)
+brightness_altered_image = img_random_brightness(original_image)
+
+fig, axs = plt.subplots(1, 2, figsize=(15, 10))
+fig.tight_layout()
+
+axs[0].imshow(original_image)
+axs[0].set_title('Original Image')
+
+axs[1].imshow(brightness_altered_image)
+axs[1].set_title('Brightness altered image ')
+
+
+def img_random_flip(image, steering_angle):
+    image = cv2.flip(image,1)
+    steering_angle = -steering_angle
+    return image, steering_angle
+random_index = random.randint(0, 1000)
+image = image_paths[random_index]
+steering_angle = steerings[random_index]
+
+
+original_image = mpimg.imread(image)
+flipped_image, flipped_steering_angle = img_random_flip(original_image, steering_angle)
+
+fig, axs = plt.subplots(1, 2, figsize=(15, 10))
+fig.tight_layout()
+
+axs[0].imshow(original_image)
+axs[0].set_title('Original Image - ' + 'Steering Angle:' + str(steering_angle))
+
+axs[1].imshow(flipped_image)
+axs[1].set_title('Flipped Image - ' + 'Steering Angle:' + str(flipped_steering_angle))
+def random_augment(image, steering_angle):
+    image = mpimg.imread(image)
+    if np.random.rand() < 0.5:
+      image = pan(image)
+    if np.random.rand() < 0.5:
+      image = zoom(image)
+    if np.random.rand() < 0.5:
+      image = img_random_brightness(image)
+    if np.random.rand() < 0.5:
+      image, steering_angle = img_random_flip(image, steering_angle)
+
+    return image, steering_angle
+ncol = 2
+nrow = 10
+
+fig, axs = plt.subplots(nrow, ncol, figsize=(15, 50))
+fig.tight_layout()
+
+for i in range(10):
+  randnum = random.randint(0, len(image_paths) - 1)
+  random_image = image_paths[randnum]
+  random_steering = steerings[randnum]
+
+  original_image = mpimg.imread(random_image)
+  augmented_image, steering = random_augment(random_image, random_steering)
+
+  axs[i][0].imshow(original_image)
+  axs[i][0].set_title("Original Image")
+
+  axs[i][1].imshow(augmented_image)
+  axs[i][1].set_title("Augmented Image")
+
+def img_preprocess(img):
+    img = img[60:135,:,:]
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
+    img = cv2.GaussianBlur(img,  (3, 3), 0)
+    img = cv2.resize(img, (200, 66))
+    img = img/255
+    return img
+image = image_paths[100]
+original_image = mpimg.imread(image)
+preprocessed_image = img_preprocess(original_image)
+
+fig, axs = plt.subplots(1, 2, figsize=(15, 10))
+fig.tight_layout()
+axs[0].imshow(original_image)
+axs[0].set_title('Original Image')
+axs[1].imshow(preprocessed_image)
+axs[1].set_title('Preprocessed Image')
+def batch_generator(image_paths, steering_ang, batch_size, istraining):
+
+  while True:
+    batch_img = []
+    batch_steering = []
+
+    for i in range(batch_size):
+      random_index = random.randint(0, len(image_paths) - 1)
+
+      if istraining:
+        im, steering = random_augment(image_paths[random_index], steering_ang[random_index])
+
+      else:
+        im = mpimg.imread(image_paths[random_index])
+        steering = steering_ang[random_index]
+
+      im = img_preprocess(im)
+      batch_img.append(im)
+      batch_steering.append(steering)
+    yield (np.asarray(batch_img), np.asarray(batch_steering))
+x_train_gen, y_train_gen = next(batch_generator(X_train, y_train, 1, 1))
+x_valid_gen, y_valid_gen = next(batch_generator(X_valid, y_valid, 1, 0))
+
+fig, axs = plt.subplots(1, 2, figsize=(15, 10))
+fig.tight_layout()
+
+axs[0].imshow(x_train_gen[0])
+axs[0].set_title('Training Image')
+
+axs[1].imshow(x_valid_gen[0])
+axs[1].set_title('Validation Image')
