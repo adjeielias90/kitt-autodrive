@@ -269,3 +269,26 @@ def nvidia_model():
   model.add(Convolution2D(36, 5, 5, subsample=(2, 2), activation='elu'))
   model.add(Convolution2D(48, 5, 5, subsample=(2, 2), activation='elu'))
   model.add(Convolution2D(64, 3, 3, activation='elu'))
+
+  model.add(Convolution2D(64, 3, 3, activation='elu'))
+#   model.add(Dropout(0.5))
+
+
+  model.add(Flatten())
+
+  model.add(Dense(100, activation = 'elu'))
+#   model.add(Dropout(0.5))
+
+  model.add(Dense(50, activation = 'elu'))
+#   model.add(Dropout(0.5))
+
+  model.add(Dense(10, activation = 'elu'))
+#   model.add(Dropout(0.5))
+
+  model.add(Dense(1))
+
+  optimizer = Adam(lr=1e-3)
+  model.compile(loss='mse', optimizer=optimizer)
+  return model
+model = nvidia_model()
+print(model.summary())
