@@ -1,0 +1,52 @@
+﻿Behavioral Cloning and Reinforcement Learning for Autonomous Driving
+
+Elias Adjei
+Key:
+NN – Neural Network
+
+
+Abstract
+As humans we often learn how to perform tasks via imitation.
+By carefully observing others perform a task, then very quickly infer the appropriate actions in the right sequence based on their observations.
+
+	In this experiment, we will employ an imitation technique “behavioral cloning from observation”.
+
+
+
+
+Introduction
+
+Behavioral cloning is a method by which human sub-cognitive skills can be learned and reproduced in a program. As the human subject performs the skill, his or her actions are recorded along with the situation that gave rise to the action.
+
+A log of these records is used as input to a neural network. The NN outputs a set of rules that reproduce the skilled behavior. 
+Each time our algorithm makes a mistake, it is slapped with a penalty, and the algorithm performs better after each iteration(epoch). This is known as reinforcement learning.
+
+This method can be used to construct automatic control systems for complex tasks for which classical control theory is inadequate. This is such in our case, which is autonomous driving.
+Autonomous driving consists of two main design approaches:
+    1. end-to-end 
+    2. modular
+       
+We will be considering the end-to-end approach for this exercise.
+
+
+
+
+
+
+
+
+Recommended Reading/Sources:
+
+
+
+	
+
+    • Behavioral cloning (Michie, Bain, & Hayes-Michie, 1990) 
+
+
+    • Bagnell, J. A., & Schneider, J. G. (2001). Autonomous helicopter control using reinforcement learning policy search methods. In International conference on robotics and automation, South Korea. IEEE Press, New York.
+      
+    • Bratko, I., & Šuc, D. (2003). Learning qualitative models. AI Magazine, 24(4), 107–119.
+      
+    • Chambers, R. A., & Michie, D. (1969). Man-machine co-operation on a learning task. In R. Parslow, R. Prowse, & R. Elliott-Green (Eds.), Computer graphics: techniques and applications. London: Plenum.
+      

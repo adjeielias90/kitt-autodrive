@@ -5,7 +5,7 @@
 [![Build Status][travis-image]][travis-url]
 <!-- [![Downloads Stats][npm-downloads]][npm-url] -->
 
-One to two paragraph statement about your product and what it does.
+Behavioral Cloning and Reinforcement Learning for Autonomous Driving
 
 <!-- ![](header.png) -->
 
@@ -16,6 +16,26 @@ OS X & Linux:
 ```sh
 pip install -r requirements.txt
 ```
+
+## Runnning the source
+
+Important: Please be sure to install all dependencies before you begin.
+
+1.[Download the correct simulation for your OS](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/Term1-Sim/term1-simulator-linux.zip)
+
+2. Run the simulator in training mode with accepted parameters based on your system.
+
+3. After driving accross the track, reverse course and drive back to your previous position.
+Do this as many times as you can to get it right. After running the simulation you will notice a new
+folder has been created with the traning_data. This folder contains the assets we will use to train our CNN.
+The training data contains images of the track with their corresponding steering angles.
+
+4. Now, after running the simulator, install all dependencies and run the driverCNN file
+under the folder /behavioral_cloning to train your data.
+Don't forget to include the training data before you begin.
+
+5. After training, re-run your simulator this time in test_mode and start the the driver.py
+located under the /behavioral_cloning folder.
 
 Windows:
 
