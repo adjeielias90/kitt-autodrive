@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 Important: Please be sure to install all dependencies before you begin.
 
-1.[Download the correct simulation for your OS](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/Term1-Sim/term1-simulator-linux.zip)
+1. [Download the correct simulation for your OS](https://github.com/udacity/self-driving-car-sim)
 
 2. Run the simulator in training mode with accepted parameters based on your system.
 
