@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 beta_simulator_linux/
+behavioral_cloning/behavioral_cloning_reinforcement_learning_abstract.docx
 build/
 develop-eggs/
 dist/
