@@ -1,5 +1,7 @@
-# Product Name
-> Short blurb about what your product does.
+# Behavioral Cloning and Reinforcement Learning for Autonomous Driving
+> A hobbyist project. Kitt is a self-driving algorithm inspired by KITT from the Knight Rider franchise. It focuses on implementing autonomous driving techniques using behavioral cloning and reinforcement learning.
+I used deep learning methods for tasks like lane detection and traffic sign recognition.
+There are also a few tests. Enjoy.
 
 [![Python Version][python-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
